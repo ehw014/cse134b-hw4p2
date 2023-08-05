@@ -1,0 +1,60 @@
+<!-- index.html -->
+<my-custom-element></my-custom-element>
+
+<script>
+    const collegeCourses = {
+    courses: [
+        { code: 'ENG101', name: 'English Composition' },
+        { code: 'MATH202', name: 'Calculus II' },
+        { code: 'HIST110', name: 'World History' },
+        { code: 'CS301', name: 'Introduction to Computer Science' },
+    ],
+    };
+
+    const jsonString = JSON.stringify(collegeCourses);
+    localStorage.setItem('collegeCourses', jsonString);
+
+  class MyCustomElement extends HTMLElement {
+    constructor() {
+      super();
+
+      // Attach the Shadow DOM to the custom element
+      const shadowRoot = this.attachShadow({ mode: 'open' });
+
+      // Retrieve the courses data from local storage
+      const storedJsonString = localStorage.getItem('collegeCourses');
+      const storedCollegeCourses = JSON.parse(storedJsonString);
+
+      // Create the root list for the custom element
+      const rootList = document.createElement('ul');
+
+      // Add the styles for the custom element
+      const style = document.createElement('style');
+      style.textContent = `
+        /* Define styles for your custom element */
+        :host {
+          display: block;
+          border: 1px solid black;
+          padding: 10px;
+          background-color: lightgray;
+        }
+      `;
+
+    // Create and append the course list items to the root ul
+    if (storedCollegeCourses && storedCollegeCourses.courses) {
+        storedCollegeCourses.courses.forEach(course => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${course.code}: ${course.name}`;
+
+          rootList.appendChild(listItem);
+        });
+      }
+      // Append the elements to the Shadow DOM
+      shadowRoot.appendChild(style);
+      shadowRoot.appendChild(rootList);
+    }
+  }
+
+  // Register the custom element with the browser
+  customElements.define('my-custom-element', MyCustomElement);
+</script>

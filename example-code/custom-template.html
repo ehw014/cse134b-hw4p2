@@ -1,6 +1,7 @@
-<project-card></project-card>
+<!-- index.html -->
+<my-custom-element></my-custom-element>
 
-<template id="project-card-template">
+<template id="my-custom-element-template">
   <style>
     /* Define styles for your custom element */
     :host {
@@ -11,16 +12,16 @@
     }
   </style>
 
+  <!-- Define the HTML structure of your custom element -->
   <div>
-    <h2>Hello, I am a custom element!</h2>
-    <img src = "" alt = "Alterate Text">
-    <p>Project Description</p>
-    <a>Read More!</a>
+    <h1>Hello, I am a custom element!</h1>
+    <p>This is some content inside the custom element.</p>
   </div>
 </template>
 
 <script>
-  class ProjectCardElement extends HTMLElement {
+  // Define the custom element class
+  class MyCustomElement extends HTMLElement {
     constructor() {
       super();
 
@@ -28,13 +29,14 @@
       const shadowRoot = this.attachShadow({ mode: 'open' });
 
       // Get the template and clone its content
-      const template = document.getElementById('project-card-template');
+      const template = document.getElementById('my-custom-element-template');
       const templateContent = template.content.cloneNode(true);
 
+      // Append the cloned template content to the Shadow DOM
       shadowRoot.appendChild(templateContent);
     }
   }
 
   // Register the custom element with the browser
-  customElements.define('project-card', MyCustomElement);
+  customElements.define('my-custom-element', MyCustomElement);
 </script>

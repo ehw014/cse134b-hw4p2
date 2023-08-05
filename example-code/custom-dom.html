@@ -1,0 +1,47 @@
+<!-- index.html -->
+<my-custom-element></my-custom-element>
+
+<script>
+  // Define the custom element class
+  class MyCustomElement extends HTMLElement {
+    constructor() {
+      super();
+
+      // Attach the Shadow DOM to the custom element
+      const shadowRoot = this.attachShadow({ mode: 'open' });
+
+      // Create the root div for the custom element
+      const rootDiv = document.createElement('div');
+
+      // Add the styles for the custom element
+      const style = document.createElement('style');
+      style.textContent = `
+        /* Define styles for your custom element */
+        :host {
+          display: block;
+          border: 1px solid black;
+          padding: 10px;
+          background-color: lightgray;
+        }
+      `;
+
+      // Create the content elements
+      const heading = document.createElement('h1');
+      heading.textContent = 'Hello, I am a custom element!';
+
+      const paragraph = document.createElement('p');
+      paragraph.textContent = 'This is some content inside the custom element.';
+
+      // Append the elements to the root div
+      rootDiv.appendChild(style);
+      rootDiv.appendChild(heading);
+      rootDiv.appendChild(paragraph);
+
+      // Append the root div to the Shadow DOM
+      shadowRoot.appendChild(rootDiv);
+    }
+  }
+
+  // Register the custom element with the browser
+  customElements.define('my-custom-element', MyCustomElement);
+</script>
