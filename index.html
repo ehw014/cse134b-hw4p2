@@ -1,40 +1,34 @@
-<project-card></project-card>
+<!--<project-card></project-card>-->
+<!DOCTYPE html>
 
 <template id="project-card-template">
-  <style>
-    /* Define styles for your custom element */
-    :host {
-      display: block;
-      border: 1px solid black;
-      padding: 10px;
-      background-color: lightgray;
-    }
-  </style>
-
-  <div>
-    <h2>Hello, I am a custom element!</h2>
-    <img src = "" alt = "Alterate Text">
-    <p>Project Description</p>
-    <a>Read More!</a>
-  </div>
+    <style>
+      /* Define styles for your custom element */
+        :host {
+            display: block;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: lightgray;
+        }
+    </style>
+  
+    <div>
+        <h2>Hello, I am a custom element!</h2>
+        <img src = "" alt = "Alterate Text">
+        <p>Project Description</p>
+        <a>Read More!</a>
+    </div>
 </template>
 
-<script>
-  class ProjectCardElement extends HTMLElement {
-    constructor() {
-      super();
+<html lang=""en>
+    <head>
+        <meta charset="UTF-8">
+        <title>Project Gallery</title>
+        <script type="module"src="projectElement.js"></script>
+    </head>
 
-      // Attach the Shadow DOM to the custom element
-      const shadowRoot = this.attachShadow({ mode: 'open' });
+    <body>
 
-      // Get the template and clone its content
-      const template = document.getElementById('project-card-template');
-      const templateContent = template.content.cloneNode(true);
+    </body>
+</html>
 
-      shadowRoot.appendChild(templateContent);
-    }
-  }
-
-  // Register the custom element with the browser
-  customElements.define('project-card', MyCustomElement);
-</script>
