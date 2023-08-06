@@ -13,7 +13,7 @@ const localJSON = {
             "description" : "we must cook some food, i am so hungry",
             "link" : "www.hungary"}
     ]};
-alert(localJSON.projects[0]);
+alert(localJSON.projects[0].name);
 
 class ProjectCardElement extends HTMLElement {
     constructor() {
@@ -27,8 +27,6 @@ class ProjectCardElement extends HTMLElement {
     }
 }
  customElements.define('project-card', ProjectCardElement);
-
-
 
 function init() {
     let element = document.getElementById('localLoadBtn');
@@ -56,15 +54,15 @@ function projectCardLoad(loadMethod) {
     else {
 
     }
-
     if(projectData) {
         projectData.forEach(project => {
-              const templateContent = template.content.cloneNode(true);
-            templateContent.setItem("h2", `${project.name}`);
-              templateContent.setItem("img," `${project.image}`);
-             templateContent.setItem("p," `${project.description}`);
-               templateContent.setItem("a," `${project.link}`);
-            shadowRoot.appendChild(templateContent);
+            const newEle = new ProjectCardElement();
+            newEle.setItem("h2", `${project.name}`);
+            newEle.setItem("img," `${project.image}`);
+            newEle.setItem("p," `${project.description}`);
+            newEle.setItem("a," `${project.link}`);
+            const shadowRoot = this.attachShadow({ mode: 'open' });
+            shadowRoot.appendChild(newEle);
            });
     }
 }
