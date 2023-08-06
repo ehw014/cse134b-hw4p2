@@ -1,4 +1,4 @@
-import localJSON from './local.json' assert {type:"json"};
+import localJSON from './local/localInfo.json';
 
 function init() {
     let element = document.getElementById('localLoadBtn');
