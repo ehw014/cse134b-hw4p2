@@ -48,3 +48,5 @@ function projectCardLoad(loadMethod) {
       }
     customElements.define('project-card', ProjectCardElement);
 }
+
+window.addEventListener('DOMContentLoaded', init);
