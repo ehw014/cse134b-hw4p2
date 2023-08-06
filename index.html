@@ -2,12 +2,12 @@
 
 <template id="project-card-template">
     <style>
-      /* Define styles for your custom element */
         :host {
-            display: flex;
+            display: relative;
             border: 1px solid black;
             padding: 5px;
             background-color: lightgray;
+            font-family:Georgia, 'Times New Roman', serif;
         }
         img {
             width: 64px;
@@ -18,7 +18,7 @@
         }
     </style>
   
-    <div>
+    <div id="card_body">
         <img src = "" alt = "Alterate Text">
         <h2>Hello, I am a custom element!</h2>
         <span id="date">01/01/2000</span>
@@ -32,15 +32,27 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Project Gallery</title>
-
+        <style>
+            #cardSection {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                gap: 20px;
+            }
+            #buttonSection {
+                padding: 10px;
+            }
+        </style>
     </head>
 
     <body>
-        <input type="button" id="localLoadBtn" value="Local Load">
-        <input type="button" id="remoteLoadBtn" value="Remote Load">
-        <h1>test below</h1>
-        <!-- type = module-->
-        <script src="./projectElement.js"></script>
+        <h1>The Project Gallery</h1>
+        <section id="buttonSection">
+            <input type="button" id="localLoadBtn" value="Local Load">
+            <input type="button" id="remoteLoadBtn" value="Remote Load">
+        </section>
+        <section id="cardSection"></section>
+        <script type="module" src="./projectElement.js"></script>
     </body>
 </html>
 
