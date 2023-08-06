@@ -64,7 +64,6 @@ function projectCardLoad(loadMethod) {
         //kids[3].setAttribute("href", `${project.link}`);
         ////const shadowRoot = newEle.attachShadow({ mode: 'open' });
         ////shadowRoot.appendChild(newEle);
-        newEle.changeValue();
         let oldEle = document.querySelector("h1");
         oldEle.insertAdjacentElement("afterend", newEle);
     });
