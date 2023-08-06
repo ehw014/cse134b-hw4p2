@@ -1,19 +1,29 @@
 const localJSON = {
     projects: [
-        {   "name" : "save the whales",
-            "image" : "path to image",
-            "description" : "we must save the whales, by jove",
-            "link" : "www.great whales!"},
-        {   "name" : "attack the snails",
-            "image" : "path to image",
-            "description" : "we must cull the snails, do it now!",
-            "link" : "www.terrible snails!!"},
-        {   "name" : "make some food",
-            "image" : "path to image",
+        {   "name" : "Stir Fry with Peppers",
+            "image" : "stir-fry.png",
+            "alt" : "Stir Fry Icon",
+            "date" : "05/13/2014",
+            "description" : "150g Meat (Shrimp, Beef, Pork, Chicken are all good!)\n25g Light Soy Sauce\n20g Oyster Sauce\n10g Fish Sauce\n2 Green Onions\n1/2 Bell Pepper",
+            "link" : "stir-fry.html"
+        },
+        {   "name" : "Omelette",
+            "image" : "omelette.png",
+            "alt" : "Omelette Icon",
+            "date" : "06/15/2014",
+            "description" : ".",
+            "link" : "omelette.html"
+        },
+        {   "name" : "Pancakes",
+            "image" : "pancakes.png",
+            "alt" : "Pancakes Icon",
+            "date" : "06/22/2014",
             "description" : "we must cook some food, i am so hungry",
-            "link" : "www.hungary"}
+            "link" : "pancakes.html"
+        }
     ]};
-alert(localJSON.projects[0].name);
+var jsonString = JSON.stringify(localJSON);
+localStorage.setItem('projects', jsonString);
 
 class ProjectCardElement extends HTMLElement {
     constructor() {
@@ -21,7 +31,6 @@ class ProjectCardElement extends HTMLElement {
         const shadowRoot = this.attachShadow({ mode: 'open' });
         const template = document.getElementById('project-card-template');
         const templateContent = template.content.cloneNode(true);
-
         shadowRoot.appendChild(templateContent);
     }
 }
@@ -38,43 +47,55 @@ function init() {
     });
 }
 
+function makeProjectCard(project) {
+    let newEle = document.createElement("project-card");
+
+    newEle.shadowRoot.querySelector("h2").textContent = project.name;
+    newEle.shadowRoot.querySelector("p").textContent = project.description;
+    newEle.shadowRoot.getElementById("date").textContent = project.date; 
+    
+    let shadowImage = newEle.shadowRoot.querySelector("img");
+    let shadowLink = newEle.shadowRoot.querySelector("a");
+    shadowImage.setAttribute("src", `${project.image}`);
+    shadowImage.setAttribute("alt", `${project.alt}`);
+    shadowLink.setAttribute("href", `${project.link}`);
+
+    let oldEle = document.querySelector("h1");
+    oldEle.insertAdjacentElement("afterend", newEle);
+}
+
+
 
 function projectCardLoad(loadMethod) {
-    //const localJSON = require('./local.json');
     let projectData;
     if(loadMethod == "local") {
-
-        const jsonString = JSON.stringify(localJSON);
-        localStorage.setItem('projects', jsonString);
-        
         const storedJsonString = localStorage.getItem('projects');
-        projectData = JSON.parse(storedJsonString);
+        const bigData = JSON.parse(storedJsonString);
+        projectData = bigData.projects;
+        projectData.forEach(project => {
+            makeProjectCard(project);
+        });
     }
     else {
-
+        const url = 'https://api.jsonbin.io/v3/b/64cf09128e4aa6225ecb6be7'
+        const binId = '64cf09128e4aa6225ecb6be7';
+        const secretKey = '$2b$10$BoUwpKBD3EnjPhxmAlyDfeSpDAIGEDmqoGr2dVMQ5mSSegGXF06PW'
+        fetch(url, {
+            headers: {
+                'X-Master-Key': secretKey,
+                'Content-Type':'application/json',
+            }
+        })
+        .then(response =>{
+            return response.json();
+        })
+        .then(data => {
+            projectData = data.record.projects;
+            projectData.forEach(project => {
+                makeProjectCard(project);
+            });
+        })
     }
-    projectData.projects.forEach(project => {
-        let newEle = document.createElement("project-card");
-
-        newEle.shadowRoot.querySelector("h2").textContent = project.name;
-        newEle.shadowRoot.querySelector("p").textContent = project.description;
-
-        let shadowImage = newEle.shadowRoot.querySelector("img");
-        let shadowLink = newEle.shadowRoot.querySelector("a");
-
-        shadowImage.setAttribute("src", `${project.image}`);
-        shadowLink.setAttribute("href", `${project.link}`);
-
-        //let kids = newEle.childNodes;
-        //kids[0].textContent = project.name;
-        //kids[1].setAttribute("src", `${project.image}`);
-        //kids[2].textContent = project.description;
-        //kids[3].setAttribute("href", `${project.link}`);
-        ////const shadowRoot = newEle.attachShadow({ mode: 'open' });
-        ////shadowRoot.appendChild(newEle);
-        let oldEle = document.querySelector("h1");
-        oldEle.insertAdjacentElement("afterend", newEle);
-    });
 }
 
 window.addEventListener('DOMContentLoaded', init);

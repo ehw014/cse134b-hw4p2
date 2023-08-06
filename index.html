@@ -1,20 +1,27 @@
-<!--<project-card></project-card>-->
 <!DOCTYPE html>
 
 <template id="project-card-template">
     <style>
       /* Define styles for your custom element */
         :host {
-            display: block;
+            display: flex;
             border: 1px solid black;
-            padding: 10px;
+            padding: 5px;
             background-color: lightgray;
+        }
+        img {
+            width: 64px;
+            height: 64px;
+        }
+        p {
+            white-space: pre-wrap;
         }
     </style>
   
     <div>
-        <h2>Hello, I am a custom element!</h2>
         <img src = "" alt = "Alterate Text">
+        <h2>Hello, I am a custom element!</h2>
+        <span id="date">01/01/2000</span>
         <p>Project Description</p>
         <a>Read More!</a>
     </div>
@@ -23,16 +30,17 @@
 <html lang=""en>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Project Gallery</title>
 
     </head>
 
     <body>
-        <project-card></project-card>
         <input type="button" id="localLoadBtn" value="Local Load">
         <input type="button" id="remoteLoadBtn" value="Remote Load">
         <h1>test below</h1>
-        <script type="module"src="./projectElement.js"></script>
+        <!-- type = module-->
+        <script src="./projectElement.js"></script>
     </body>
 </html>
 
