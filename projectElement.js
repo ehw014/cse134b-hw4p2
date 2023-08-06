@@ -54,17 +54,15 @@ function projectCardLoad(loadMethod) {
     else {
 
     }
-    if(projectData) {
-        projectData.forEach(project => {
-            let newEle = document.createElement("project-card");
-            newEle.setItem("h2", `${project.name}`);
-            newEle.setItem("img," `${project.image}`);
-            newEle.setItem("p," `${project.description}`);
-            newEle.setItem("a," `${project.link}`);
-            const shadowRoot = this.attachShadow({ mode: 'open' });
-            shadowRoot.appendChild(newEle);
-           });
-    }
+    projectData.forEach(project => {
+        let newEle = document.createElement("project-card");
+        newEle.setItem("h2", `${project.name}`);
+        newEle.setItem("img," `${project.image}`);
+        newEle.setItem("p," `${project.description}`);
+        newEle.setItem("a," `${project.link}`);
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        shadowRoot.appendChild(newEle);
+    });
 }
 
 window.addEventListener('DOMContentLoaded', init);
