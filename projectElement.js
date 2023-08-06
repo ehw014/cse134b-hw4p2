@@ -26,7 +26,7 @@ class ProjectCardElement extends HTMLElement {
         shadowRoot.appendChild(templateContent);
     }
 }
- customElements.define('project-card', ProjectCardElement);
+customElements.define('project-card', ProjectCardElement);
 
 function init() {
     let element = document.getElementById('localLoadBtn');
@@ -62,6 +62,7 @@ function projectCardLoad(loadMethod) {
         newEle.setItem("a," `${project.link}`);
         const shadowRoot = this.attachShadow({ mode: 'open' });
         shadowRoot.appendChild(newEle);
+        document.getElementById("h1").insertAdjacentHTML("afterend", newEle);
     });
 }
 
