@@ -19,7 +19,7 @@ function init() {
     element.addEventListener('click',function() {
         projectCardLoad("local");
     });
-    element = document.getElementById('loadRemoteBtn');
+    element = document.getElementById('remoteLoadBtn');
     element.addEventListener('click', function() {
         projectCardLoad("remote");
     });
