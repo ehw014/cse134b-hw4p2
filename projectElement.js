@@ -16,23 +16,13 @@ const localJSON = {
 alert(localJSON.projects[0].name);
 
 class ProjectCardElement extends HTMLElement {
-    //constructor(name = "Project Title", date="01/01/2000", image= "link to image",
-    //             description="Project Description", link = "link to project") {
-    constructor(){
+    constructor() {
         super();
-
         const shadowRoot = this.attachShadow({ mode: 'open' });
         const template = document.getElementById('project-card-template');
         const templateContent = template.content.cloneNode(true);
-                    
-        //templateContent.querySelector("h2").textContent = name;
-        //templateContent.querySelector("img").setAttribute("src", image);
-        //templateContent.querySelector("p").textContent;
 
         shadowRoot.appendChild(templateContent);
-    }
-    changeValue(){
-        alert(templateContent.querySelector("h2"));
     }
 }
 customElements.define('project-card', ProjectCardElement);
@@ -65,6 +55,8 @@ function projectCardLoad(loadMethod) {
     }
     projectData.projects.forEach(project => {
         let newEle = document.createElement("project-card");
+        let shadowTitle = newEle.shadowRoot.querySelector("h2");
+        shadowTitle.textContent = "allo";
         //let kids = newEle.childNodes;
         //kids[0].textContent = project.name;
         //kids[1].setAttribute("src", `${project.image}`);
