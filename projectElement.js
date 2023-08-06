@@ -13,6 +13,22 @@ const localJSON = {
             "description" : "we must cook some food, i am so hungry",
             "link" : "www.hungary"}
     ]};
+alert(localJSON.projects[0]);
+
+class ProjectCardElement extends HTMLElement {
+    constructor() {
+        super();
+
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        const template = document.getElementById('project-card-template');
+        const templateContent = template.content.cloneNode(true);
+
+        shadowRoot.appendChild(templateContent);
+    }
+}
+ customElements.define('project-card', ProjectCardElement);
+
+
 
 function init() {
     let element = document.getElementById('localLoadBtn');
@@ -40,29 +56,17 @@ function projectCardLoad(loadMethod) {
     else {
 
     }
-    class ProjectCardElement extends HTMLElement {
-        constructor() {
-            super();
-    
-            const shadowRoot = this.attachShadow({ mode: 'open' });
-    
-            const template = document.getElementById('project-card-template');
 
-
-            if(projectData) {
-                projectData.forEach(project => {
-                    const templateContent = template.content.cloneNode(true);
-                    templateContent.setItem("h2", `${project.name}`);
-                    templateContent.setItem("img," `${project.image}`);
-                    templateContent.setItem("p," `${project.description}`);
-                    templateContent.setItem("a," `${project.link}`);
-                    shadowRoot.appendChild(templateContent);
-                });
-            }
-    
-        }
-      }
-    customElements.define('project-card', ProjectCardElement);
+    if(projectData) {
+        projectData.forEach(project => {
+              const templateContent = template.content.cloneNode(true);
+            templateContent.setItem("h2", `${project.name}`);
+              templateContent.setItem("img," `${project.image}`);
+             templateContent.setItem("p," `${project.description}`);
+               templateContent.setItem("a," `${project.link}`);
+            shadowRoot.appendChild(templateContent);
+           });
+    }
 }
 
 window.addEventListener('DOMContentLoaded', init);
