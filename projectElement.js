@@ -1,4 +1,18 @@
-import localJSON from './local/localInfo.json';
+const localJSON = {
+    projects: [
+        {   "name" : "save the whales",
+            "image" : "path to image",
+            "description" : "we must save the whales, by jove",
+            "link" : "www.great whales!"},
+        {   "name" : "attack the snails",
+            "image" : "path to image",
+            "description" : "we must cull the snails, do it now!",
+            "link" : "www.terrible snails!!"},
+        {   "name" : "make some food",
+            "image" : "path to image",
+            "description" : "we must cook some food, i am so hungry",
+            "link" : "www.hungary"}
+    ]};
 
 function init() {
     let element = document.getElementById('localLoadBtn');
