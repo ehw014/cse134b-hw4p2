@@ -62,7 +62,8 @@ function projectCardLoad(loadMethod) {
         //newEle.childNodes[3].setAttribute("href", `${project.link}`);
         ////const shadowRoot = newEle.attachShadow({ mode: 'open' });
         ////shadowRoot.appendChild(newEle);
-        document.getElementById("h1").insertAdjacentElement("afterend", newEle);
+        let oldEle = document.querySelector("h1");
+        oldEle.insertAdjacentElement("afterend", newEle);
     });
 }
 
