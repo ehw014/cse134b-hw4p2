@@ -1,9 +1,11 @@
+import localJSON from './local.json';
+
 function init() {
     let element = document.getElementById('localLoadBtn');
     element.addEventListener('click',function() {
         projectCardLoad("local");
     });
-    element = document.getElementById('loadRemotBtn');
+    element = document.getElementById('loadRemoteBtn');
     element.addEventListener('click', function() {
         projectCardLoad("remote");
     });
@@ -11,7 +13,7 @@ function init() {
 
 
 function projectCardLoad(loadMethod) {
-    const localJSON = require('./local.json');
+    //const localJSON = require('./local.json');
     let projectData;
     if(loadMethod == "local") {
 
