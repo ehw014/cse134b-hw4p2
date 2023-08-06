@@ -55,8 +55,16 @@ function projectCardLoad(loadMethod) {
     }
     projectData.projects.forEach(project => {
         let newEle = document.createElement("project-card");
-        let shadowTitle = newEle.shadowRoot.querySelector("h2");
-        shadowTitle.textContent = "allo";
+
+        newEle.shadowRoot.querySelector("h2").textContent = project.name;
+        newEle.shadowRoot.querySelector("p").textContent = project.description;
+
+        let shadowImage = newEle.shadowRoot.querySelector("img");
+        let shadowLink = newEle.shadowRoot.querySelector("a");
+
+        shadowImage.setAttribute("src", `${project.image}`);
+        shadowLink.setAttribute("href", `${project.link}`);
+
         //let kids = newEle.childNodes;
         //kids[0].textContent = project.name;
         //kids[1].setAttribute("src", `${project.image}`);
