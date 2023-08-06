@@ -46,7 +46,7 @@ function projectCardLoad(loadMethod) {
     if(loadMethod == "local") {
 
         const jsonString = JSON.stringify(localJSON);
-        localStorage.setItem('currentProjects', jsonString);
+        localStorage.setItem('projects', jsonString);
         
         const storedJsonString = localStorage.getItem('projects');
         projectData = JSON.parse(storedJsonString);
