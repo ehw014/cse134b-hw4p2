@@ -25,20 +25,6 @@ class ProjectCardElement extends HTMLElement {
 
         shadowRoot.appendChild(templateContent);
     }
-    constructor(p1,p2,p3,p4) {
-        super();
-
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        const template = document.getElementById('project-card-template');
-        const templateContent = template.content.cloneNode(true);
-        templateContent.childNodes[0].textContent = p1;
-        templateContent.childNodes[1].setAttribute("src", p2);
-        templateContent.childNodes[2].textContent = p3;
-        templateContent.childNodes[3].setAttribute("href", p4);
-
-
-        shadowRoot.appendChild(templateContent);
-    }
 }
 customElements.define('project-card', ProjectCardElement);
 
@@ -69,14 +55,14 @@ function projectCardLoad(loadMethod) {
 
     }
     projectData.projects.forEach(project => {
-        //let newEle = document.createElement("project-card");
+        let newEle = document.createElement("project-card");
         //newEle.childNodes[0].textContent = project.name;
         //newEle.childNodes[1].setAttribute("src", `${project.image}`);
         //newEle.childNodes[2].textContent = project.description;
         //newEle.childNodes[3].setAttribute("href", `${project.link}`);
         ////const shadowRoot = newEle.attachShadow({ mode: 'open' });
         ////shadowRoot.appendChild(newEle);
-        //document.getElementById("h1").insertAdjacentHTML("afterend", newEle);
+        document.getElementById("h1").insertAdjacentElement("afterend", newEle);
     });
 }
 
