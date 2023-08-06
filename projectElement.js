@@ -56,6 +56,7 @@ function projectCardLoad(loadMethod) {
     }
     projectData.projects.forEach(project => {
         let newEle = document.createElement("project-card");
+        let kids = newEle.childNodes;
         //newEle.childNodes[0].textContent = project.name;
         //newEle.childNodes[1].setAttribute("src", `${project.image}`);
         //newEle.childNodes[2].textContent = project.description;
