@@ -60,8 +60,8 @@ function projectCardLoad(loadMethod) {
         //newEle.childNodes[1].setAttribute("src", `${project.image}`);
         //newEle.childNodes[2].textContent = project.description;
         //newEle.childNodes[3].setAttribute("href", `${project.link}`);
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.appendChild(newEle);
+        ////const shadowRoot = newEle.attachShadow({ mode: 'open' });
+        ////shadowRoot.appendChild(newEle);
         document.getElementById("h1").insertAdjacentHTML("afterend", newEle);
     });
 }
