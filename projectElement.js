@@ -1,17 +1,51 @@
-class ProjectCardElement extends HTMLElement {
-    constructor() {
-      super();
+import localJSON from './local.json';
 
-      // Attach the Shadow DOM to the custom element
-      const shadowRoot = this.attachShadow({ mode: 'open' });
+function init() {
+    let element = document.getElementById('localLoadBtn');
+    element.addEventListener('click',function() {
+        projectCardLoad("local");
+    });
+    element = document.getElementById('loadRemotBtn');
+    element.addEventListener('click', function() {
+        projectCardLoad("remote");
+    });
+}
 
-      // Get the template and clone its content
-      const template = document.getElementById('project-card-template');
-      const templateContent = template.content.cloneNode(true);
 
-      shadowRoot.appendChild(templateContent);
+function projectCardLoad(loadMethod) {
+    let projectData;
+    if(loadMethod == "local") {
+
+        const jsonString = JSON.stringify(localJSON);
+        localStorage.setItem('currentProjects', jsonString);
+        
+        const storedJsonString = localStorage.getItem('projects');
+        projectData = JSON.parse(storedJsonString);
     }
-  }
+    else {
 
-  // Register the custom element with the browser
-  customElements.define('project-card', ProjectCardElement);
+    }
+    class ProjectCardElement extends HTMLElement {
+        constructor() {
+            super();
+    
+            const shadowRoot = this.attachShadow({ mode: 'open' });
+    
+            const template = document.getElementById('project-card-template');
+
+
+            if(projectData) {
+                projectData.forEach(project => {
+                    const templateContent = template.content.cloneNode(true);
+                    templateContent.setItem("h2", `${project.name}`);
+                    templateContent.setItem("img," `${project.image}`);
+                    templateContent.setItem("p," `${project.description}`);
+                    templateContent.setItem("a," `${project.link}`);
+                    shadowRoot.appendChild(templateContent);
+                });
+            }
+    
+        }
+      }
+    customElements.define('project-card', ProjectCardElement);
+}
