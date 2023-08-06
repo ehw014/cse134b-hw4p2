@@ -54,7 +54,7 @@ function projectCardLoad(loadMethod) {
     else {
 
     }
-    projectData.forEach(project => {
+    projectData.projects.forEach(project => {
         let newEle = document.createElement("project-card");
         newEle.setItem("h2", `${project.name}`);
         newEle.setItem("img," `${project.image}`);
