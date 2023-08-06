@@ -57,10 +57,10 @@ function projectCardLoad(loadMethod) {
     projectData.projects.forEach(project => {
         let newEle = document.createElement("project-card");
         let kids = newEle.childNodes;
-        //newEle.childNodes[0].textContent = project.name;
-        //newEle.childNodes[1].setAttribute("src", `${project.image}`);
-        //newEle.childNodes[2].textContent = project.description;
-        //newEle.childNodes[3].setAttribute("href", `${project.link}`);
+        kids[0].textContent = project.name;
+        kids[1].setAttribute("src", `${project.image}`);
+        kids[2].textContent = project.description;
+        kids[3].setAttribute("href", `${project.link}`);
         ////const shadowRoot = newEle.attachShadow({ mode: 'open' });
         ////shadowRoot.appendChild(newEle);
         let oldEle = document.querySelector("h1");
